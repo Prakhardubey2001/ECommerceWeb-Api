@@ -1,0 +1,76 @@
+  
+version: '3.4'
+
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+      - 5115:80
+    depends_on:
+      - eureka
+
+  ecommerce.authapi:
+    container_name: myecomauth
+    image: ${DOCKER_REGISTRY-}ecommerceauthapi
+    build:
+      context: .
+      dockerfile: ECommerce.AuthApi/Dockerfile
+    depends_on:
+      - mysqlserverecom
+      - eureka
+    environment:
+      ConnectionStrings__DefaultConnection: Server=mysqlserverecom,1433;Database=Ecommerce_Auth_DB;User Id=SA;Password=PaSSw0rd123;Encrypt=False 
+      ASPNETCORE_ENVIRONMENT: Development  
+    ports:
+      - 5052:80
+
+  ecommerce.cartapi:
+    container_name: myecomcart
+    image: ${DOCKER_REGISTRY-}ecommercecartapi
+    build:
+      context: .
+      dockerfile: ECommerce.CartAPI/Dockerfile
+    depends_on:
+      - mysqlserverecom
+      - eureka
+    environment:
+      ConnectionStrings__DefaultConnection: Server=mysqlserverecom,1433;Database=Ecommerce_Cart_DB;User Id=SA;Password=PaSSw0rd123;Encrypt=False 
+      ASPNETCORE_ENVIRONMENT: Development  
+    ports:
+      - 5072:80
+
+  ecommerceproductapi:
+    container_name: myecomproduct
+    image: ${DOCKER_REGISTRY-}ecommerceproductapi
+    build:
+      context: .
+      dockerfile: ECommerceProductAPI/Dockerfile
+    depends_on:
+      - mysqlserverecom
+      - eureka
+    environment:
+      ConnectionStrings__DefaultConnection: Server=mysqlserverecom,1433;Database=Ecommerce_Product_DB;User Id=SA;Password=PaSSw0rd123;Encrypt=False 
+      ASPNETCORE_ENVIRONMENT: Development  
+    ports:
+      - 5041:80
+
+  mysqlserverecom:
+    container_name: sqlserverecomcontainer
+    image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: PaSSw0rd123
+      MSSQL_PID: Express
+    ports:
+      - 1433:1433
+
+  eureka:
+    container_name: eurekacontainer
+    image: steeltoeoss/eureka-server
+    ports:
+      - 8761:8761
+
+

@@ -1,0 +1,163 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth/login",
+      "DownstreamScheme": "http",
+      
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5052
+        }
+      ],
+      "UpstreamPathTemplate": "/EcomOcelotapi/auth/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/user-details",
+      "DownstreamScheme": "http",
+      
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5052
+        }
+      ],
+      "UpstreamPathTemplate": "/EcomOcelotapi/auth/user-details",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5041
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/product",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/getbyname/{code}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5041
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/product/getbyname/{code}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5041
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/product/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5041
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/product",
+      "UpstreamHttpMethod": [ "POST" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5041
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/product/{id}",
+      "UpstreamHttpMethod": [ "DELETE", "PUT" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/removecartitems",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5072
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/cart/removecartitems",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/add-item-cart",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5072
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/cart/add-item-cart",
+      "UpstreamHttpMethod": [ "POST" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/get-cart",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5072
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/cart/get-cart",
+      "UpstreamHttpMethod": [ "GET" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/check-out",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "172.17.0.1",
+          "Port": 5072
+        }
+      ],
+      
+      "UpstreamPathTemplate": "/EcomOcelotapi/cart/check-out",
+      "UpstreamHttpMethod": [ "POST" ]
+
+    }
+  ],
+  "GlobalConfiguration": {
+    "UseServiceDiscovery": true,
+
+    "ServiceDiscoveryProvider": {
+      "Host": "172.17.0.1",
+      "Port": 8761,
+      "Type": "eureka"
+
+    }
+
+  }
+}
